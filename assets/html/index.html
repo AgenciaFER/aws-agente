@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Agent - Teste S3 Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 600px;
+            width: 90%;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .info-item {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            opacity: 0.8;
+        }
+        
+        .info-value {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(46, 204, 113, 0.8);
+            border-radius: 25px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .timestamp {
+            margin-top: 30px;
+            opacity: 0.7;
+            font-size: 0.9em;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .container {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 AWS Agent</h1>
+        <h2>Website hospedado no Amazon S3</h2>
+        
+        <div class="status">
+            ✅ Online e Funcionando!
+        </div>
+        
+        <div class="info-box">
+            <div class="info-item">
+                <span class="info-label">👤 Usuário:</span>
+                <span class="info-value">marcos</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">🆔 Account ID:</span>
+                <span class="info-value">664418955839</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">🌍 Região:</span>
+                <span class="info-value">us-east-1</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">🪣 Bucket:</span>
+                <span class="info-value" id="bucket-name">Carregando...</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🪣</div>
+                <div>S3 Storage</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔐</div>
+                <div>Seguro</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div>Rápido</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <div>Global</div>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h3 style="margin-bottom: 15px;">📋 Informações Técnicas</h3>
+            <div class="info-item">
+                <span class="info-label">🌐 Protocolo:</span>
+                <span class="info-value">HTTPS</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">📊 Hospedagem:</span>
+                <span class="info-value">Amazon S3 Static Website</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">🛠️ Criado por:</span>
+                <span class="info-value">AWS Multi-Account Agent</span>
+            </div>
+        </div>
+        
+        <div class="timestamp">
+            🕒 Página criada em: <span id="timestamp"></span>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by AWS Multi-Account Agent</p>
+            <p>Este website está hospedado no Amazon S3</p>
+        </div>
+    </div>
+    
+    <script>
+        // Adicionar timestamp atual
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('pt-BR');
+        
+        // Tentar detectar o nome do bucket da URL
+        const hostname = window.location.hostname;
+        if (hostname.includes('s3') || hostname.includes('amazonaws')) {
+            const bucketName = hostname.split('.')[0];
+            document.getElementById('bucket-name').textContent = bucketName;
+        } else {
+            document.getElementById('bucket-name').textContent = 'Local/Desenvolvimento';
+        }
+        
+        // Adicionar efeito de hover nas features
+        document.querySelectorAll('.feature').forEach(feature => {
+            feature.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            feature.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

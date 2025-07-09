@@ -1,0 +1,43 @@
+disable_existing_loggers: false
+formatters:
+  audit:
+    datefmt: '%Y-%m-%d %H:%M:%S'
+    format: '%(asctime)s - AUDIT - %(levelname)s - %(message)s'
+  secure:
+    datefmt: '%Y-%m-%d %H:%M:%S'
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  audit:
+    backupCount: 10
+    class: logging.handlers.RotatingFileHandler
+    filename: /Users/afv/Documents/aws/logs/audit.log
+    formatter: audit
+    level: INFO
+    maxBytes: 10485760
+  file:
+    backupCount: 5
+    class: logging.handlers.RotatingFileHandler
+    filename: /Users/afv/Documents/aws/logs/aws-agent.log
+    formatter: secure
+    level: INFO
+    maxBytes: 10485760
+  security:
+    backupCount: 10
+    class: logging.handlers.RotatingFileHandler
+    filename: /Users/afv/Documents/aws/logs/security.log
+    formatter: audit
+    level: WARNING
+    maxBytes: 10485760
+loggers:
+  aws_agent:
+    handlers:
+    - file
+    - audit
+    level: INFO
+    propagate: false
+  aws_agent.security:
+    handlers:
+    - security
+    level: WARNING
+    propagate: false
+version: 1

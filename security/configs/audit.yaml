@@ -1,0 +1,15 @@
+audit:
+  alerts:
+    failed_login_threshold: 3
+    suspicious_activity_patterns:
+    - multiple_failed_logins
+    - unusual_access_patterns
+    - privilege_escalation_attempts
+  enabled: true
+  log_all_actions: true
+  log_failed_attempts: true
+  log_permission_checks: true
+  retention_policy:
+    archive_after_days: 90
+    compression: true
+    days: 365

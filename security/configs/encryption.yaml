@@ -1,0 +1,12 @@
+encryption:
+  default_algorithm: AES-256-GCM
+  key_derivation:
+    hash_algorithm: SHA-256
+    iterations: 150000
+    method: PBKDF2
+    salt_length: 32
+  secure_random:
+    entropy_sources:
+    - os.urandom
+    - secrets
+    use_system_random: true

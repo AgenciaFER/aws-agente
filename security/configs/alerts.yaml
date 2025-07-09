@@ -1,0 +1,31 @@
+alerts:
+  channels:
+    email:
+      enabled: true
+      recipients:
+      - admin@exemplo.com
+      sender: security@exemplo.com
+      smtp_port: 587
+      smtp_server: smtp.gmail.com
+      use_tls: true
+    slack:
+      enabled: false
+      webhook_url: https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+    webhook:
+      enabled: false
+      url: https://your-webhook-endpoint.com/alerts
+  rate_limiting:
+    cooldown_period: 300
+    enabled: true
+    max_alerts_per_hour: 10
+  severity_levels:
+    critical:
+    - critical
+    - security_breach
+    high:
+    - error
+    low:
+    - info
+    - debug
+    medium:
+    - warning

@@ -1,0 +1,92 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source code files
+*.py text
+*.md text
+*.yml text
+*.yaml text
+*.json text
+*.txt text
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# Documentation
+*.md text
+*.rst text
+*.txt text
+docs/* text
+
+# Configuration files
+*.ini text
+*.cfg text
+*.conf text
+*.toml text
+pyproject.toml text
+setup.py text
+setup.cfg text
+requirements.txt text
+Makefile text
+
+# Web files
+*.html text
+*.css text
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# Python specific
+*.pyc binary
+*.pyo binary
+*.pyd binary
+*.egg binary
+*.whl binary
+
+# Exclude files from exports
+.gitattributes export-ignore
+.gitignore export-ignore
+.github/ export-ignore
+tests/ export-ignore
+.pytest_cache/ export-ignore
+.coverage export-ignore
+htmlcov/ export-ignore
+.tox/ export-ignore
+venv/ export-ignore
+.venv/ export-ignore
+__pycache__/ export-ignore
+*.egg-info/ export-ignore
+
+# Set specific files as generated
+CHANGELOG.md linguist-generated=true
+docs/api/ linguist-generated=true
+
+# Mark specific directories for language detection
+src/aws_agent/*.py linguist-language=Python
+scripts/*.py linguist-language=Python
+tests/*.py linguist-language=Python
+examples/*.py linguist-language=Python
+
+# Documentation language
+docs/*.md linguist-documentation=true
+*.md linguist-documentation=true
+
+# Vendor files
+venv/ linguist-vendored=true
+.venv/ linguist-vendored=true
+vendor/ linguist-vendored=true

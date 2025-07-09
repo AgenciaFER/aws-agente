@@ -1,0 +1,33 @@
+name: "AWS Multi-Account Agent CodeQL Config"
+
+disable-default-queries: false
+
+queries:
+  - name: security-extended
+    uses: security-extended
+  - name: security-and-quality
+    uses: security-and-quality
+
+paths:
+  - src/aws_agent
+  - tests
+
+paths-ignore:
+  - "**/*.md"
+  - "**/*.txt"
+  - "**/*.yml"
+  - "**/*.yaml"
+  - "**/*.json"
+  - "docs/**"
+  - "examples/**"
+  - "scripts/**"
+  - "venv/**"
+  - ".venv/**"
+  - "__pycache__/**"
+  - "*.egg-info/**"
+
+packs:
+  - codeql/python-queries:AlertSuppression.ql
+  - codeql/python-queries:Security/CWE-079/XSS.ql
+  - codeql/python-queries:Security/CWE-089/SqlInjection.ql
+  - codeql/python-queries:Security/CWE-078/CommandInjection.ql

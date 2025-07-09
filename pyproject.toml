@@ -1,0 +1,179 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-multi-account-agent"
+version = "1.0.0"
+description = "A secure multi-account AWS management tool with CLI interface"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "GitHub Copilot", email = "support@example.com"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+keywords = ["aws", "multi-account", "management", "cli", "boto3", "cloud"]
+dependencies = [
+    "boto3>=1.26.0",
+    "botocore>=1.29.0",
+    "pydantic>=2.0.0",
+    "PyYAML>=6.0",
+    "rich>=13.0.0",
+    "cryptography>=3.4.8",
+    "keyring>=23.0.0",
+    "click>=8.0.0",
+    "colorama>=0.4.4",
+    "tabulate>=0.9.0",
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "black>=22.0.0",
+    "flake8>=6.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "twine>=4.0.0",
+    "build>=0.10.0",
+]
+docs = [
+    "mkdocs>=1.4.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocs-mermaid2-plugin>=0.6.0",
+]
+security = [
+    "safety>=2.0.0",
+    "bandit>=1.7.0",
+    "semgrep>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/AgenciaFER/aws-agente"
+Repository = "https://github.com/AgenciaFER/aws-agente"
+Documentation = "https://github.com/AgenciaFER/aws-agente#readme"
+"Bug Tracker" = "https://github.com/AgenciaFER/aws-agente/issues"
+Changelog = "https://github.com/AgenciaFER/aws-agente/blob/main/CHANGELOG.md"
+
+[project.scripts]
+aws-agent = "aws_agent.cli.main:main"
+aws-multi-account = "aws_agent.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+aws_agent = ["config/*.yaml", "templates/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--disable-warnings",
+    "--cov=src/aws_agent",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--cov-fail-under=80",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "aws: marks tests that require AWS credentials",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["aws_agent"]
+skip_glob = ["*/.venv/*", "*/venv/*"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "boto3.*",
+    "botocore.*",
+    "rich.*",
+    "keyring.*",
+    "yaml.*",
+]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/venv/*",
+    "*/.venv/*",
+    "*/examples/*",
+    "*/scripts/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
