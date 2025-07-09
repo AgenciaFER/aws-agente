@@ -342,7 +342,7 @@ Use o [template de feature request](.github/ISSUE_TEMPLATE/feature_request.md)
 🧪 Testes:              200+
 📖 Documentação:        15 páginas
 🔐 Checks de segurança: 30+
-⚡ Serviços AWS:        4 integrados
+⚡ Serviços AWS:        All integrados
 🎯 Casos de uso:        12 implementados
 ```
 
@@ -358,10 +358,9 @@ Use o [template de feature request](.github/ISSUE_TEMPLATE/feature_request.md)
 
 ## 📞 **Contato e Suporte**
 
-- **Autor**: [Seu Nome](https://github.com/seu-usuario)
-- **Email**: seu.email@exemplo.com
-- **LinkedIn**: [Seu LinkedIn](https://linkedin.com/in/seu-profile)
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/aws-multi-account-agent/issues)
+- **Autor**: [Seu Nome](https://github.com/AgenciaFER)
+- **Email**: contato@agenciafer.com.br
+- **LinkedIn**: [Seu LinkedIn](https://linkedin.com/in/oswaldo-ferraz)
 
 ---
 
