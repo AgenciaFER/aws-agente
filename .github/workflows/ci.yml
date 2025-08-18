@@ -12,7 +12,7 @@ jobs:
     name: Security Scan
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -52,7 +52,7 @@ jobs:
         python-version: [3.9, 3.10, 3.11]
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -107,7 +107,7 @@ jobs:
     needs: [security-scan, test]
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -136,7 +136,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     
     - name: Set up Python
       uses: actions/setup-python@v4
